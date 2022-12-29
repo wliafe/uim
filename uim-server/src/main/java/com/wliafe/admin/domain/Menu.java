@@ -5,19 +5,20 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @TableName("uim_menu")
-public class Menu {
+public class Menu implements Serializable {
     @TableId(value = "menu_id", type = IdType.ASSIGN_UUID)
     private String menuId;
     @TableField(value = "menu_name")
     private String menuName;
-    private String status;
+    private Integer status;
     @TableField(value = "del_flag")
     @TableLogic(value = "0", delval = "1")
-    private String delFlag;
+    private Integer delFlag;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @TableField(value = "create_time", fill = FieldFill.INSERT)

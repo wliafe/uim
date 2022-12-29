@@ -25,7 +25,7 @@ public class MailConfig {
     @Resource
     private TemplateEngine templateEngine;
 
-    public void sendMailForActivationAccount(String activationUrl, String email) {
+    public void sendMailForActivationAccount(String code, String email) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true);
@@ -34,7 +34,7 @@ public class MailConfig {
             message.setTo(email);
             message.setSentDate(new Date());
             Context context = new Context();
-            context.setVariable("activationUrl", activationUrl);
+            context.setVariable("code", code);
             String text = templateEngine.process("active.html", context);
             message.setText(text, true);
         } catch (MessagingException e) {

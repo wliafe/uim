@@ -5,11 +5,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @TableName("uim_user")
-public class User {
+public class User implements Serializable {
     @TableId(value = "user_id", type = IdType.NONE)
     private String userId;
     @TableField(value = "nick_name")
@@ -26,10 +27,10 @@ public class User {
     private String city;
     private String district;
     private String address;
-    private String status;
+    private Integer status;
     @TableField(value = "del_flag")
     @TableLogic(value = "0", delval = "1")
-    private String delFlag;
+    private Integer delFlag;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
@@ -38,6 +39,8 @@ public class User {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @TableField(value = "login_date")
     private Date loginDate;
     @TableField(value = "login_ip")

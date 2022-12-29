@@ -59,4 +59,10 @@ public class UserController {
             return AjaxResult.error(e.getMessage());
         }
     }
+
+    @ApiOperation("根据邮箱获取用户信息")
+    @GetMapping("/get/email")
+    public AjaxResult getByEmail(@RequestParam String email) {
+        return AjaxResult.success(userService.selectByEmail(email).get(ServiceResult.DATA_TAG));
+    }
 }

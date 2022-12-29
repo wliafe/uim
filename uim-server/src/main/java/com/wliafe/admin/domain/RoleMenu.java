@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @TableName("uim_role_menu")
-public class RoleMenu {
+public class RoleMenu implements Serializable {
     @TableField(value = "role_id")
     private String roleId;
     @TableField(value = "role_name")

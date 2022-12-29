@@ -16,7 +16,7 @@ public class SystemController {
     MailConfig mailConfig;
 
     @ApiOperation("获取验证码")
-    @GetMapping("/email/code")
+    @GetMapping("/code/email")
     public AjaxResult code(@RequestParam String email) {
         String code = CodeUtil.randomCode();
         mailConfig.sendMailForActivationAccount(code, email);
