@@ -1,0 +1,39 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://43.138.104.4:3306/uim?characterEncoding=utf-8
+    username: root
+    password: Mysql.123
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher #解决swagger报错
+  mail:
+    protocol: smtp
+    host: smtp.qq.com
+    port: 25
+    username: wliafe@qq.com
+    password: iakwlgqaqornbdaj
+    default-encoding: utf-8
+    properties:
+      mail:
+        debug: true
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+swagger:
+  enabled: true # swagger开关
+  controller-path: com.wliafe.admin.controller
+
+uim:
+  title: 用户信息管理系统
+  description: 记录并管理用户基本信息
+  author: wliafe
+  version: 1.0
+
+
+
