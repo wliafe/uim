@@ -34,6 +34,8 @@ uim:
   description: 记录并管理用户基本信息
   author: wliafe
   version: 1.0
-
-
+log:
+  path: D:/用户信息管理系统/uim-server
+  name: uim
+  level: INFO
 

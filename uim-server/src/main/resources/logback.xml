@@ -3,6 +3,11 @@
 
     <contextName>logback</contextName>
 
+    <!-- 获取yml中的log地址 -->
+    <springProperty scope="context" name="Path" source="log.path" defaultValue="D:/uim"/>
+    <springProperty scope="context" name="Name" source="log.name" defaultValue="uim"/>
+    <springProperty scope="context" name="Level" source="log.level" defaultValue="INFO"/>
+
     <!-- 彩色日志 -->
     <!-- 彩色日志依赖的渲染类 -->
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
@@ -15,13 +20,13 @@
     <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
 
     <!-- 定义日志存储的路径，不要配置相对路径 -->
-    <property name="FILE_PATH" value="D:/用户信息管理系统/uim/log/uim-log.%d{yyyy-MM-dd}.%i.log" />
+    <property name="FILE_PATH" value="${Path}/log/${Name}-log.%d{yyyy-MM-dd}.%i.log" />
 
     <!-- 控制台输出日志 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <!-- 日志级别过滤INFO以下 -->
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>INFO</level>
+            <level>${Level}</level>
         </filter>
         <encoder>
             <!-- 按照上面配置的LOG_PATTERN来打印日志 -->
