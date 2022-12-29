@@ -23,4 +23,4 @@ token登录
 
 
 ## 数据库
-![数据库表](%E8%B5%84%E6%96%99/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8.png)
+![数据库表](source/images/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8.png)
