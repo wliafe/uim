@@ -1,11 +1,11 @@
 # uim
-    用户信息管理系统
+用户信息管理系统
 ## 后端技术栈
 主要技术：
 
     SpringBoot+Mybatis-plus+SpringMVC
 
-    其他技术：
+其他技术：
 
     lombok setget自动生成
 
