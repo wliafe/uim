@@ -6,6 +6,8 @@
 
     openjdk-18
 
+    Mysql 8
+
 ## 后端技术栈
 主要技术：
 
@@ -28,6 +30,8 @@
     token登录
 
     fastjson
+
+    过滤器
 
 ## 数据库
 ![数据库表](source/images/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8.png)

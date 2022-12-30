@@ -8,4 +8,7 @@ public interface UserService {
 
     ServiceResult selectByEmail(String email);
 
+    boolean emailIsRegister(String email);
+
+    boolean emailNotRegister(String email);
 }
