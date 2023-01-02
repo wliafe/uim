@@ -3,16 +3,23 @@ package com.wliafe.admin.domain;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
+@RequiredArgsConstructor
 @TableName("uim_user")
 public class User implements Serializable {
+    @NonNull
     @TableId(value = "user_id", type = IdType.NONE)
     private String userId;
+    @NonNull
     @TableField(value = "nick_name")
     private String nickName;
     private String password;

@@ -1,11 +1,9 @@
-package com.wliafe.common.config.mail;
+package com.wliafe.common.service;
 
-import com.wliafe.common.config.my.UimConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
@@ -14,10 +12,10 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
 
-@Component
-public class MailConfig {
-    @Autowired
-    private UimConfig uimConfig;
+@Service
+public class MailService {
+    @Value("${uim.title}")
+    private String title;
     @Value("${spring.mail.username}")
     private String mailUsername;
     @Resource
@@ -29,7 +27,7 @@ public class MailConfig {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true);
-            message.setSubject(uimConfig.getTitle());
+            message.setSubject(title);
             message.setFrom(mailUsername);
             message.setTo(email);
             message.setSentDate(new Date());

@@ -7,9 +7,7 @@ spring:
     url: jdbc:mysql://43.138.104.4:3306/uim?useUnicode=true&characterEncoding=UTF-8 #数据库url
     username: root #数据库登录用户
     password: Mysql.123 #数据库登录密码
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher #解决swagger报错
+
   mail:
     protocol: smtp
     host: smtp.qq.com
@@ -17,9 +15,9 @@ spring:
     username: wliafe@qq.com #发送邮件邮箱
     password: iakwlgqaqornbdaj #授权码
     default-encoding: utf-8
-#    properties:
-#      mail:
-#        debug: true #控制台是否输出
+  #    properties:
+  #      mail:
+  #        debug: true #控制台是否输出
   redis:
     host: 43.138.104.4 #redis IP地址
     port: 6379 #redis 端口地址
@@ -35,20 +33,21 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-swagger:
-  enabled: true # swagger开关
-  controller-path: com.wliafe.admin.controller #swagger 读取文件目录
-
 uim:
   title: 用户信息管理系统 #系统名称
   description: 记录并管理用户基本信息 #系统描述
-  author: wliafe #作者
-  version: 1.0 #版本
+  version: 1.0 #版本 默认 1.0
+
 log:
   path: D:/用户信息管理系统/uim-server #日志地址
   name: uim #日志名
   level: INFO #日志显示级别 error warn
 
-token:
-  time: 14 #redis token 14天过期
+#token:
+#  time: 14 #redis token 14天过期 默认 14
 
+#role:
+#  admin:
+#    phone:
+#    email:
+#    password:

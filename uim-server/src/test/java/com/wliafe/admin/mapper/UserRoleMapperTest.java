@@ -1,5 +1,6 @@
 package com.wliafe.admin.mapper;
 
+import com.wliafe.admin.domain.UserRole;
 import com.wliafe.admin.mapper.UserRoleMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ public class UserRoleMapperTest {
 
     @Test
     void testInsertData() {
-        int data = userRoleMapper.insertData("123453", "11111", "458965", "5544");
+        int data = userRoleMapper.insert(new UserRole("123453", "11111", "458965", "5544"));
         System.out.println(data);
     }
 }

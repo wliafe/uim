@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class TokenService {
-    @Value("${token.time}")
+    @Value("${token.time:14}")
     private Integer time;
 
     @Autowired
@@ -18,6 +18,10 @@ public class TokenService {
 
     public static String getToken() {
         return UUIDUtil.getUUID();
+    }
+
+    public String setToken() {
+        return setToken("");
     }
 
     public String setToken(Object data) {
@@ -34,12 +38,16 @@ public class TokenService {
      */
     public boolean checkToken(String token) {
         token = token == null ? "" : token;
-        Long expire = redisTemplate.getExpire("tokens:"+token, TimeUnit.MINUTES);
+        Long expire = redisTemplate.getExpire("tokens:" + token, TimeUnit.MINUTES);
         if (expire > 0) {
             if (expire < 30)
-                redisTemplate.expire("tokens:"+token, 3, TimeUnit.HOURS);
+                redisTemplate.expire("tokens:" + token, 3, TimeUnit.HOURS);
             return true;
         } else
             return false;
+    }
+
+    public Object getValue(String token) {
+        return redisTemplate.opsForValue().get("tokens:" + token);
     }
 }

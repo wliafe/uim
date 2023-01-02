@@ -27,11 +27,8 @@ public class UserMapperTest {
 
     @Test
     void testInsert() {
-        User user = new User();
-        user.setNickName("abc");
-        user.setPassword("efg");
-        int a = userMapper.insert(user);
-        System.out.println("insert return :" + a);
+        User user = new User("444","abc");
+        userMapper.insert(user);
     }
 
     @Test
@@ -41,16 +38,7 @@ public class UserMapperTest {
 
     @Test
     void testUpdate() {
-        User user = new User();
-        user.setUserId("4eeba69cd824e95bd8c5ceca13d7da71");
-        user.setNickName("ce");
-        user.setPassword("ab");
+        User user = new User("4eeba69cd824e95bd8c5ceca13d7da71", "ce");
         userMapper.updateById(user);
-    }
-
-    @Test
-    void testSelectByEmail() {
-        User user = userMapper.selectByEmail("wliaf@163.com");
-        System.out.println(user);
     }
 }

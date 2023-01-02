@@ -1,7 +1,7 @@
 package com.wliafe.admin.service;
 
-public interface RoleService {
-    boolean isExist(String roleId);
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.wliafe.admin.domain.Role;
 
-    boolean isNotExist(String roleId);
+public interface RoleService extends IService<Role> {
 }

@@ -2,6 +2,7 @@ package com.wliafe.common.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
@@ -12,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class CodeService {
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private StringRedisTemplate redisTemplate;
 
     /**
      * 获取验证码
@@ -43,6 +44,16 @@ public class CodeService {
      * @return 成功 true 失败 false
      */
     public boolean checkCode(String string, String code) {
-        return code.equals(redisTemplate.opsForValue().get("codes:" + string));
+        return code.equals(getCode(string));
+    }
+
+    /**
+     * 获取验证码
+     *
+     * @param string key
+     * @return 验证码
+     */
+    public String getCode(String string) {
+        return redisTemplate.opsForValue().get("codes:" + string);
     }
 }

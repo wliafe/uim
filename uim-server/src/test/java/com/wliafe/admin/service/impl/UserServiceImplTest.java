@@ -11,10 +11,15 @@ public class UserServiceImplTest {
     @Autowired
     private UserService userService;
 
+    //    @Test
+//    void testRegister() {
+//        User user = new User();
+//        userService.register(user,"admin" );
+//    }
     @Test
-    void testRegister() {
-        User user = new User();
-        userService.register(user,"admin" );
+    void testSelectByEmail() {
+        User user = userService.selectByEmail("wliafe");
+        System.out.println(user);
     }
 
 }
