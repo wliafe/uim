@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -39,12 +40,11 @@ public class TokenService {
     public boolean checkToken(String token) {
         token = token == null ? "" : token;
         Long expire = redisTemplate.getExpire("tokens:" + token, TimeUnit.MINUTES);
-        if (expire > 0) {
-            if (expire < 30)
-                redisTemplate.expire("tokens:" + token, 3, TimeUnit.HOURS);
+        if (Objects.isNull(expire)) return false;
+        else if (expire > 0) {
+            if (expire < 30) redisTemplate.expire("tokens:" + token, 3, TimeUnit.HOURS);
             return true;
-        } else
-            return false;
+        } else return false;
     }
 
     public Object getValue(String token) {

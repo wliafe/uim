@@ -11,17 +11,15 @@
 ## 后端技术栈
 主要技术：
 
-    SpringBoot+Mybatis-plus+SpringMVC
+    SpringBoot+Mybatis-plus+SpringMVC+spring-security安全框架
 
 其他技术：
 
-    lombok setget自动生成
+    lombok 自动生成
 
     Java Mail Sender邮箱发送
 
     Slf4j 日志
-
-    swagger 接口文档
 
     异常处理
 
@@ -34,4 +32,3 @@
     过滤器
 
 ## 数据库
-![数据库表](source/images/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8.png)

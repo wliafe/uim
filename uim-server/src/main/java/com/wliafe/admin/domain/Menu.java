@@ -15,14 +15,23 @@ public class Menu implements Serializable {
     private String menuId;
     @TableField(value = "menu_name")
     private String menuName;
-    private Integer status;
+    private String path;
+    private String component;
+    private String perms;
+    private String icon;
+    private boolean visible;
+    private boolean status;
     @TableField(value = "del_flag")
     @TableLogic(value = "0", delval = "1")
-    private Integer delFlag;
+    private boolean delFlag;
+    @TableField(value = "create_by")
+    private String createBy;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
+    @TableField(value = "update_by")
+    private String updateBy;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)

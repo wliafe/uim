@@ -7,7 +7,6 @@ spring:
     url: jdbc:mysql://43.138.104.4:3306/uim?useUnicode=true&characterEncoding=UTF-8 #数据库url
     username: root #数据库登录用户
     password: Mysql.123 #数据库登录密码
-
   mail:
     protocol: smtp
     host: smtp.qq.com
@@ -31,7 +30,7 @@ spring:
         max-wait: 100 #连接等待时间
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #mybatis-plus 日志打印
 
 uim:
   title: 用户信息管理系统 #系统名称

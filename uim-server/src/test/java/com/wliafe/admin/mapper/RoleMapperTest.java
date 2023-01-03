@@ -14,9 +14,7 @@ public class RoleMapperTest {
     @Test
     void testInsert() {
         Role role = new Role();
-//        role.setRoleName("超级管理员");
-        role.setRoleName("用户");
-//        role.setRoleName("管理员");
+        role.setRoleName("管理员");
         roleMapper.insert(role);
     }
 

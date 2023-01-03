@@ -5,6 +5,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -41,10 +42,17 @@ public class CodeService {
      *
      * @param string key
      * @param code   验证码
-     * @return 成功 true 失败 false
+     * @return 不正确 true 正确 false
      */
-    public boolean checkCode(String string, String code) {
-        return code.equals(getCode(string));
+    public boolean codeNotRight(String string, String code) {
+        return !code.equals(getCode(string));
+    }
+
+    public boolean isCodeNonExpire(String string) {
+        string = string == null ? "" : string;
+        Long codeExpire = redisTemplate.getExpire("codes" + string, TimeUnit.SECONDS);
+        if (Objects.isNull(codeExpire)) return false;
+        else return codeExpire > 0;
     }
 
     /**

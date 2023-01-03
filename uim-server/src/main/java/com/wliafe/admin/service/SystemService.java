@@ -1,10 +1,11 @@
 package com.wliafe.admin.service;
 
+import com.wliafe.admin.domain.User;
 import com.wliafe.common.domain.AjaxResult;
-import com.wliafe.common.security.details.BaseDetails;
+import com.wliafe.common.security.authentication.AuthenticationToken;
 
 public interface SystemService {
-    boolean register(String email, String roleId);
+    boolean register(User user, String roleId);
 
-    AjaxResult login(BaseDetails authenticate);
+    AjaxResult login(AuthenticationToken authentication);
 }

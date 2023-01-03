@@ -13,7 +13,7 @@ public class UserRoleMapperTest {
 
     @Test
     void testInsertData() {
-        int data = userRoleMapper.insert(new UserRole("123453", "11111", "458965", "5544"));
+        int data = userRoleMapper.insert(new UserRole("123453", "458965"));
         System.out.println(data);
     }
 }

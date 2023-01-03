@@ -12,10 +12,6 @@ import java.io.Serializable;
 public class RoleMenu implements Serializable {
     @TableField(value = "role_id")
     private String roleId;
-    @TableField(value = "role_name")
-    private String roleName;
     @TableField(value = "menu_id")
     private String menuId;
-    @TableField(value = "menu_name")
-    private String menuName;
 }

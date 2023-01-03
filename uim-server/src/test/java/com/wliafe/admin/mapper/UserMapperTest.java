@@ -1,5 +1,6 @@
 package com.wliafe.admin.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wliafe.admin.domain.User;
 import com.wliafe.admin.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
@@ -20,14 +21,16 @@ public class UserMapperTest {
     }
 
     @Test
-    void testSelectById() {
-        User employee = userMapper.selectById(1);
+    void testSelectByEmail() {
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getEmail, "wliafe@163.com");
+        User employee = userMapper.selectOne(queryWrapper);
         System.out.println(employee);
     }
 
     @Test
     void testInsert() {
-        User user = new User("444","abc");
+        User user = new User();
         userMapper.insert(user);
     }
 
@@ -38,7 +41,7 @@ public class UserMapperTest {
 
     @Test
     void testUpdate() {
-        User user = new User("4eeba69cd824e95bd8c5ceca13d7da71", "ce");
+        User user = new User();
         userMapper.updateById(user);
     }
 }

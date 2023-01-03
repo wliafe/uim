@@ -1,18 +1,18 @@
 package com.wliafe.admin.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.wliafe.admin.domain.Role;
 import com.wliafe.admin.domain.User;
 import com.wliafe.admin.domain.UserRole;
-import com.wliafe.admin.mapper.RoleMapper;
 import com.wliafe.admin.mapper.UserMapper;
 import com.wliafe.admin.mapper.UserRoleMapper;
 import com.wliafe.admin.service.SystemService;
 import com.wliafe.common.domain.AjaxResult;
+import com.wliafe.common.security.authentication.AuthenticationToken;
 import com.wliafe.common.security.details.BaseDetails;
 import com.wliafe.common.service.TokenService;
 import com.wliafe.common.utils.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,46 +26,32 @@ public class SystemServiceImpl implements SystemService {
     @Autowired
     private UserRoleMapper userRoleMapper;
     @Autowired
-    private RoleMapper roleMapper;
-    @Autowired
     private TokenService tokenService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
 
     @Override
     @Transactional
-    public boolean register(String email, String roleId) {
-        Role role = roleMapper.selectById(roleId);
-        if (Objects.isNull(role)) throw new RuntimeException("角色不存在");
-        User user = selectByEmail(email);
-        if (Objects.isNull(user)) {
-            user = new User(UUIDUtil.getUUID(), "用户_" + UUIDUtil.getUUID(10));
-            user.setEmail(email);
+    public boolean register(User user, String roleId) {
+        if (Objects.isNull(user.getUserId())) {
+            user.setUserId(UUIDUtil.getUUID());
+            user.setNickName("用户_" + UUIDUtil.getUUID(10));
             userMapper.insert(user);
-        } else if (!Objects.isNull(selectByUserIdAndRoleId(user.getUserId(), roleId)))
-            throw new RuntimeException("邮箱已注册");
-        userRoleMapper.insert(new UserRole(user.getUserId(), user.getNickName(), role.getRoleId(), role.getRoleName()));
+        }
+        userRoleMapper.insert(new UserRole(user.getUserId(), roleId));
         return true;
     }
 
 
     @Override
-    public AjaxResult login(BaseDetails baseDetails) {
+    public AjaxResult login(AuthenticationToken authentication) {
+        Authentication authenticate = authenticationManager.authenticate(authentication);
+        if (Objects.isNull(authenticate)) throw new RuntimeException("登录失败");
+        BaseDetails baseDetails = (BaseDetails) authenticate.getPrincipal();
         String token = tokenService.setToken(baseDetails);
         HashMap<String, Object> map = new HashMap<>();
         map.put("token", token);
         return AjaxResult.success("登陆成功", map);
-    }
-
-    public User selectByEmail(String email) {
-        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(User::getEmail, email);
-        return userMapper.selectOne(queryWrapper);
-    }
-
-    private UserRole selectByUserIdAndRoleId(String userId, String roleId) {
-        LambdaQueryWrapper<UserRole> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(UserRole::getUserId, userId);
-        queryWrapper.eq(UserRole::getRoleId, roleId);
-        return userRoleMapper.selectOne(queryWrapper);
     }
 }

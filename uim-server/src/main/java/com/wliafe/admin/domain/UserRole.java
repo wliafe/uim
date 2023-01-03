@@ -15,10 +15,6 @@ import java.io.Serializable;
 public class UserRole implements Serializable {
     @TableField(value = "user_id")
     private String userId;
-    @TableField(value = "nick_name")
-    private String nickName;
     @TableField(value = "role_id")
     private String roleId;
-    @TableField(value = "role_name")
-    private String roleName;
 }
