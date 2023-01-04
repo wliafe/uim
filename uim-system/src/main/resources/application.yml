@@ -1,0 +1,46 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://43.138.104.4:3306/uim?useUnicode=true&characterEncoding=UTF-8 #数据库url
+    username: root #数据库登录用户
+    password: Mysql.123 #数据库登录密码
+  mail:
+    protocol: smtp
+    host: smtp.qq.com
+    port: 25
+    username: wliafe@qq.com #发送邮件邮箱
+    password: iakwlgqaqornbdaj #授权码
+    default-encoding: utf-8
+  redis:
+    host: 43.138.104.4 #redis IP地址
+    port: 6379 #redis 端口地址
+    password: redis.2022 #redis 密码
+    database: 1
+    lettuce:
+      pool:
+        max-active: 8 #最大连接
+        max-idle: 8 #最大空闲连接
+        min-idle: 0 #最小空闲连接
+        max-wait: 100 #连接等待时间
+
+uim:
+  title: 用户信息管理系统 #系统名称
+  description: 记录并管理用户基本信息 #系统描述
+  version: 1.0 #版本 默认 1.0
+
+log:
+  path: D:/uim #日志地址
+  name: uim #日志名
+  level: INFO #日志显示级别 error warn
+
+#token:
+#  time: 14 #redis token 14天过期 默认 14
+
+#role:
+#  admin:
+#    phone:
+#    email:
+#    password:
