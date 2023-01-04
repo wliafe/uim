@@ -12,8 +12,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //数据库事务
 @EnableTransactionManagement
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-//filter 过滤器
-//@ServletComponentScan
 public class UimApplication {
     public static void main(String[] args) {
         SpringApplication.run(UimApplication.class, args);
