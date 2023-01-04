@@ -63,4 +63,9 @@ public class SystemController {
         AuthenticationToken authentication = new AuthenticationToken(login.getEmail(), login.getCode());
         return systemService.login(authentication);
     }
+
+    @RequestMapping("/logout")
+    public AjaxResult logout() {
+        return systemService.logout();
+    }
 }

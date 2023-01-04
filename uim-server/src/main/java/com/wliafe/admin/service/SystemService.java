@@ -8,4 +8,6 @@ public interface SystemService {
     boolean register(User user, String roleId);
 
     AjaxResult login(AuthenticationToken authentication);
+
+    AjaxResult logout();
 }

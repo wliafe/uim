@@ -13,6 +13,7 @@ import com.wliafe.common.utils.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,5 +54,13 @@ public class SystemServiceImpl implements SystemService {
         HashMap<String, Object> map = new HashMap<>();
         map.put("token", token);
         return AjaxResult.success("登陆成功", map);
+    }
+
+    @Override
+    public AjaxResult logout() {
+        AuthenticationToken authentication = (AuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        String token = (String) authentication.getCredentials();
+        tokenService.deleteToken(token);
+        return AjaxResult.success("已退出登录");
     }
 }

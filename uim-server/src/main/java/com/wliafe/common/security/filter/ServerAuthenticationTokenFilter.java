@@ -5,7 +5,6 @@ import com.wliafe.common.security.details.BaseDetails;
 import com.wliafe.common.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -33,7 +32,7 @@ public class ServerAuthenticationTokenFilter extends OncePerRequestFilter {
         if (!tokenService.checkToken(token)) throw new RuntimeException("用户未登录");
         BaseDetails baseDetails = (BaseDetails) tokenService.getValue(token);
         if (Objects.isNull(baseDetails)) throw new RemoteException("baseDetails 解析失败");
-        AuthenticationToken authentication = new AuthenticationToken(baseDetails.getUser(), null, baseDetails.getAuthorities());
+        AuthenticationToken authentication = new AuthenticationToken(baseDetails.getUser(), token, baseDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
     }

@@ -50,4 +50,8 @@ public class TokenService {
     public Object getValue(String token) {
         return redisTemplate.opsForValue().get("tokens:" + token);
     }
+
+    public void deleteToken(String token) {
+        redisTemplate.delete("tokens:" + token);
+    }
 }

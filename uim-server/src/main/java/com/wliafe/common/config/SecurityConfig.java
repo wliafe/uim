@@ -12,7 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -22,6 +24,10 @@ public class SecurityConfig {
     private ServerAuthenticationTokenFilter serverAuthenticationTokenFilter;
     @Autowired
     private EmailCodeAuthenticationProvider emailCodeAuthenticationProvider;
+    @Autowired
+    private AuthenticationEntryPoint authenticationEntryPoint;
+    @Autowired
+    private AccessDeniedHandler accessDeniedHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -39,10 +45,18 @@ public class SecurityConfig {
                 .authenticationProvider(emailCodeAuthenticationProvider)
                 .authorizeRequests()
                 // 对于登录接口 允许匿名访问
-                .antMatchers("/sys/**").anonymous()
+                .antMatchers("/sys/register/**", "/sys/login/**").anonymous()
+                .antMatchers("/sys/code/**").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated();
         http.addFilterBefore(serverAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        http.exceptionHandling()
+                // 认证失败处理器
+                .authenticationEntryPoint(authenticationEntryPoint)
+                // 授权失败处理器
+                .accessDeniedHandler(accessDeniedHandler);
+        // 跨域请求
+        http.cors();
         return http.build();
     }
 
