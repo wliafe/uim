@@ -9,7 +9,7 @@
 ## 后端技术栈
 主要技术：
 
-    SpringBoot+Mybatis-plus+SpringMVC+spring-security安全框架
+    SpringBoot + Mybatis-plus + SpringMVC + spring-security安全框架
 
 其他技术：
 
