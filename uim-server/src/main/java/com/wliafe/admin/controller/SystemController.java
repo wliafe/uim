@@ -11,6 +11,12 @@ import com.wliafe.admin.service.SystemService;
 import com.wliafe.common.service.MailService;
 import com.wliafe.common.domain.AjaxResult;
 import com.wliafe.common.service.CodeService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,12 +44,23 @@ public class SystemController {
     @Autowired
     private UserRoleService userRoleService;
 
+    @Operation(summary = "通过邮箱获取验证码")
+    @Parameter(name = "email", example = "wliafe@163.com", required = true, in = ParameterIn.QUERY)
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "请求成功"),
+            @ApiResponse(responseCode = "500", description = "请求失败")
+    })
     @GetMapping("/code/email")
     public AjaxResult getCodeByEmail(@RequestParam String email) {
         mailService.sendMailForActivationAccount(codeService.setCode(email), email);
         return AjaxResult.success();
     }
 
+    @Operation(summary = "通过邮箱注册", description = "所需属性 email code")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "请求成功"),
+            @ApiResponse(responseCode = "500", description = "请求失败")
+    })
     @PostMapping("/register/email")
     public AjaxResult register(@RequestBody Register register) {
         if (codeService.codeNotRight(register.getEmail(), register.getCode())) throw new RuntimeException("验证失败");
@@ -58,13 +75,20 @@ public class SystemController {
         return AjaxResult.success("用户添加成功");
     }
 
+    @Operation(summary = "通过邮箱登录", description = "所需属性 email code")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "请求成功"),
+            @ApiResponse(responseCode = "500", description = "请求失败")
+    })
     @PostMapping("/login/email/code")
     public AjaxResult login(@RequestBody Login login) {
         AuthenticationToken authentication = new AuthenticationToken(login.getEmail(), login.getCode());
         return systemService.login(authentication);
     }
 
-    @RequestMapping("/logout")
+    @Operation(summary = "退出登录")
+    @ApiResponse(responseCode = "200", description = "请求成功")
+    @PostMapping("/logout")
     public AjaxResult logout() {
         return systemService.logout();
     }

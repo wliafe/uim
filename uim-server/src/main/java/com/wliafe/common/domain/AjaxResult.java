@@ -1,6 +1,7 @@
 package com.wliafe.common.domain;
 
 import com.wliafe.common.constant.HttpStatus;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -8,9 +9,13 @@ import lombok.Data;
  * 键值对信息返回
  */
 @Data
+@Schema(description = "请求返回类型")
 public class AjaxResult {
+    @Schema(description = "校验码", example = "200")
     private Integer code;
+    @Schema(description = "返回消息", example = "请求成功")
     private String msg;
+    @Schema(description = "返回数据")
     private Object data;
 
     /**

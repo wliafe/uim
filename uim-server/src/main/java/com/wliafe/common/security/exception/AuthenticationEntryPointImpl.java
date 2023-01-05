@@ -15,7 +15,7 @@ import java.io.IOException;
 public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, org.springframework.security.core.AuthenticationException authException) throws IOException, ServletException {
-        String json = JSON.toJSONString(AjaxResult.error("认证失败"));
+        String json = JSON.toJSONString(AjaxResult.error("用户未登录"));
         WebUtils.renderString(response, json);
     }
 }

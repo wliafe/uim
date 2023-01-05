@@ -1,5 +1,6 @@
 package com.wliafe.common.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -14,8 +15,8 @@ import java.util.Date;
 
 @Service
 public class MailService {
-    @Value("${uim.title}")
-    private String title;
+    @Autowired
+    private UimService uimService;
     @Value("${spring.mail.username}")
     private String mailUsername;
     @Resource
@@ -27,7 +28,7 @@ public class MailService {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true);
-            message.setSubject(title);
+            message.setSubject(uimService.getTitle());
             message.setFrom(mailUsername);
             message.setTo(email);
             message.setSentDate(new Date());

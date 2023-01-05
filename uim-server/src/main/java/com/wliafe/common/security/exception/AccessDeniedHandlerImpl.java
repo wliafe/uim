@@ -16,7 +16,7 @@ import java.io.IOException;
 public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        String json = JSON.toJSONString(AjaxResult.error("授权失败"));
+        String json = JSON.toJSONString(AjaxResult.error("用户权限不足"));
         WebUtils.renderString(response, json);
     }
 }
