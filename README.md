@@ -2,10 +2,9 @@
 
 用户信息管理系统
 
-## 配置信息
+## 前端技术栈
 
-    openjdk-18
-    Mysql 8
+    Vue3 + Vite + Pinia + Vue Router + feach
 
 ## 后端技术栈
 主要技术：
@@ -20,5 +19,10 @@
     Slf4j 日志
     fastjson json序列化工具
     springdoc 接口文档管理
+
+## 配置信息
+
+    openjdk-18
+    Mysql 8
 
 ## 数据库
