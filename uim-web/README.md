@@ -1,28 +1,28 @@
 # uim-web
 
-This template should help get you started developing with Vue 3 in Vite.
+该模板应该可以帮助您开始在 Vite 中使用 Vue 3 进行开发。
 
-## Recommended IDE Setup
+## 推荐的 IDE 设置
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-## Customize configuration
+## 自定义配置
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+参见  [Vite 配置参考](https://vitejs.dev/config/).
 
-## Project Setup
+## 项目设置
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### 为开发编译和热重载
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### 编译和缩小生产
 
 ```sh
 npm run build
