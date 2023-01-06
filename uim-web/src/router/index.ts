@@ -9,25 +9,25 @@ const router = createRouter({
       component: () => import("@/views/HomeView.vue"),
       children: [
         {
-          path: "/account",
+          path: "account",
           name: "account",
           component: () => import("@/components/pages/AccountPage.vue"),
         },
       ],
     },
     {
-      path: "/login",
-      component: () => import("@/views/index.vue"),
+      path: "/",
+      component: () => import("@/views/LoginView.vue"),
       children: [
         {
-          path: "/login",
+          path: "login",
           name: "login",
-          component: () => import("@/components/layiout/Login.vue"),
+          component: () => import("@/components/layiout/login/Login.vue"),
         },
         {
-          path: "/register",
+          path: "register",
           name: "register",
-          component: () => import("@/components/layiout/Register.vue"),
+          component: () => import("@/components/layiout/login/Register.vue"),
         },
       ],
     },

@@ -5,15 +5,16 @@
       <el-container>
         <el-header><BaseHeader /></el-header>
         <el-main><RouterView /></el-main>
-        <el-footer>Footer</el-footer>
+        <el-footer><BaseFooter /></el-footer>
       </el-container>
     </el-container>
   </div>
 </template>
 
 <script setup lang="ts">
-import BaseHeader from "@/components/layiout/BaseHeader.vue";
-import BaseAside from "@/components/layiout/BaseAside.vue";
+import BaseHeader from "@/components/layiout/home/BaseHeader.vue";
+import BaseAside from "@/components/layiout/home/BaseAside.vue";
+import BaseFooter from "@/components/layiout/home/BaseFooter.vue";
 </script>
 
 <style scoped>
@@ -31,7 +32,14 @@ import BaseAside from "@/components/layiout/BaseAside.vue";
 .el-aside {
   width: auto;
 }
-.el-footer {
-  background-color: blanchedalmond;
+.el-footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+<style>
+a {
+  text-decoration: none;
 }
 </style>
