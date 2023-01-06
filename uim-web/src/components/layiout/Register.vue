@@ -43,40 +43,40 @@
     </div>
   </el-form>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref, reactive } from "vue";
-const registerRef = ref();
+import type { FormInstance } from "element-plus";
+const registerRef = ref<FormInstance>();
 const register = reactive({
   email: "",
   code: "",
   password: "",
   checkPass: "",
 });
-
-function checkEmail(rule, value, callback) {
+function checkEmail(rule: any, value: any, callback: any) {
   if (!value) {
     return callback(new Error("请输入邮箱"));
   }
   callback();
 }
-function checkCode(rule, value, callback) {
+function checkCode(rule: any, value: any, callback: any) {
   if (!value) {
     return callback(new Error("请输入验证码"));
   }
   callback();
 }
-function validatePassword(rule, value, callback) {
+function validatePassword(rule: any, value: any, callback: any) {
   if (value === "") {
     callback(new Error("请输入密码"));
   } else {
     if (register.checkPass !== "") {
-      if (!registerRef.value)
-        return ruleFormRef.value.validateField("checkPass", () => null);
+      if (!registerRef.value) return;
+      registerRef.value.validateField("checkPass", () => null);
     }
     callback();
   }
 }
-function validateCheckPass(rule, value, callback) {
+function validateCheckPass(rule: any, value: any, callback: any) {
   if (value === "") {
     callback(new Error("请再一次输入密码"));
   } else if (value !== register.password) {

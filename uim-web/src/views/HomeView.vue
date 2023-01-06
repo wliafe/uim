@@ -11,9 +11,9 @@
   </div>
 </template>
 
-<script setup>
-import BaseHeader from "./layiout/BaseHeader.vue";
-import BaseAside from "./layiout/BaseAside.vue";
+<script setup lang="ts">
+import BaseHeader from "@/components/layiout/BaseHeader.vue";
+import BaseAside from "@/components/layiout/BaseAside.vue";
 </script>
 
 <style scoped>

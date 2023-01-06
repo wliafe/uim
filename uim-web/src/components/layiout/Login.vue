@@ -17,7 +17,7 @@
         :prefix-icon="Unlock"
       />
     </el-form-item>
-    <el-checkbox v-model="checked1" label="记住密码" size="large" />
+    <el-checkbox v-model="formInline" label="记住密码" size="large" />
     <el-form-item>
       <el-button class="el-button" type="primary" @click="onSubmit">登录</el-button>
     </el-form-item>
@@ -29,7 +29,7 @@
     </div>
   </el-form>
 </template>
-<script setup>
+<script setup lang="ts">
 import { reactive } from "vue";
 import { UserFilled, Unlock } from "@element-plus/icons-vue";
 

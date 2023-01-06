@@ -6,7 +6,7 @@
     :ellipsis="false"
     @select="handleSelect"
   >
-    <el-radio-group  style="margin-bottom: 20px">
+    <el-radio-group style="margin-bottom: 20px">
       <el-radio-button :label="false">expand</el-radio-button>
       <el-radio-button :label="true">collapse</el-radio-button>
     </el-radio-group>
@@ -22,7 +22,7 @@
   </el-menu>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
 };

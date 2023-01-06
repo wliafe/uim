@@ -7,10 +7,12 @@
     @open="handleOpen"
     @close="handleClose"
   >
-    <el-menu-item index="1">
-      <el-icon><House /></el-icon>
-      <template #title>首页</template>
-    </el-menu-item>
+    <RouterLink to="/">
+      <el-menu-item index="1">
+        <el-icon><House /></el-icon>
+        <template #title>首页</template>
+      </el-menu-item>
+    </RouterLink>
     <el-sub-menu index="2">
       <template #title>
         <el-icon><IconMenu /></el-icon>
@@ -32,11 +34,12 @@
   </el-menu>
 </template>
 
-<script lang="ts" setup>
-import { ref } from "vue";
+<script setup lang="ts">
 import { Document, Menu as IconMenu, House } from "@element-plus/icons-vue";
 import { RouterLink } from "vue-router";
-const isCollapse = ref(false);
+import { useCollapseStore } from "@/stores/collapse";
+const collapse = useCollapseStore();
+const isCollapse = collapse.collapse;
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
 };
@@ -48,6 +51,9 @@ const handleClose = (key: string, keyPath: string[]) => {
 <style scoped>
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 170px;
+  height: 100%;
+}
+.el-menu--collapse {
   height: 100%;
 }
 </style>
