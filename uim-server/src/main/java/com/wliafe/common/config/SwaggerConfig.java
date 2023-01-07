@@ -49,9 +49,9 @@ public class SwaggerConfig {
     }
 
     @Bean
-    public GroupedOpenApi usersGroup() {
+    public GroupedOpenApi defaultGroup() {
         return GroupedOpenApi.builder()
-                .group("users")
+                .group("default")
                 .addOperationCustomizer((operation, handlerMethod) -> {
                     operation.addSecurityItem(new SecurityRequirement().addList(headerName));
                     return operation;

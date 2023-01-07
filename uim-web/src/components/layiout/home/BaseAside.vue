@@ -9,7 +9,9 @@
   >
     <el-menu-item index="/" class="home-logo">
       <el-icon><div class="logo" /></el-icon>
-      <template #title><span style="color: black">用户信息管理系统</span></template>
+      <template #title>
+        <span style="color: black">{{ title }}</span>
+      </template>
     </el-menu-item>
     <el-menu-item index="/">
       <el-icon><House /></el-icon>
@@ -39,6 +41,7 @@
 <script setup lang="ts">
 import { Document, Menu as IconMenu, House } from "@element-plus/icons-vue";
 import { useCollapseStore } from "@/stores/collapse";
+const title = import.meta.env.VITE_TITLE;
 const isCollapse = useCollapseStore();
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);

@@ -2,13 +2,16 @@
   <div class="common-layout">
     <el-container class="el-container-base">
       <el-main>
-        <div class="project-name">用户信息管理系统</div>
+        <div class="project-name">{{ title }}</div>
         <br />
         <RouterView />
       </el-main>
     </el-container>
   </div>
 </template>
+<script setup lang="ts">
+const title = import.meta.env.VITE_TITLE;
+</script>
 
 <style scoped>
 .common-layout {

@@ -46,6 +46,7 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
 import type { FormInstance } from "element-plus";
+import { codeEmail } from "@/api/login";
 const registerRef = ref<FormInstance>();
 const register = reactive({
   email: "",
@@ -93,12 +94,12 @@ const registerRules = reactive({
   checkPass: [{ validator: validateCheckPass, trigger: "blur" }],
 });
 
-function onSubmit() {
+async function onSubmit() {
   alert("submit!");
 }
 
-function getCode() {
-  alert("getCode");
+async function getCode() {
+  await codeEmail("wliafe@163.com");
 }
 </script>
 

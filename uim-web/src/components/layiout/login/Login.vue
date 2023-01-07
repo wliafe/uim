@@ -32,12 +32,10 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 import { UserFilled, Unlock } from "@element-plus/icons-vue";
-
 const formInline = reactive({
   email: "",
   password: "",
 });
-
 function onSubmit() {
   alert("submit!");
 }
