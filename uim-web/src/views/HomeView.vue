@@ -12,9 +12,9 @@
 </template>
 
 <script setup lang="ts">
-import BaseHeader from "@/components/layiout/home/BaseHeader.vue";
-import BaseAside from "@/components/layiout/home/BaseAside.vue";
-import BaseFooter from "@/components/layiout/home/BaseFooter.vue";
+import BaseHeader from "@/components/layiout/BaseHeader.vue";
+import BaseAside from "@/components/layiout/BaseAside.vue";
+import BaseFooter from "@/components/layiout/BaseFooter.vue";
 </script>
 
 <style scoped>
