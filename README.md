@@ -4,7 +4,7 @@
 
 ## 前端技术栈
 
-    Vue3 + Vite + Pinia + Vue Router + feach
+    Vue3 + Vite + Pinia + Vue Router + ElementPlus + feach
 
 ## 后端技术栈
 主要技术：

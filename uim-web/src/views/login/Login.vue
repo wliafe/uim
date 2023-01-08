@@ -44,7 +44,7 @@
       </el-input>
     </el-form-item>
     <div class="login-code">
-      <el-link :underline="false" @click="loginchoice = 'password'"> 密码登录 </el-link>
+      <el-link :underline="false" @click="loginchoice = 'password'">密码登录</el-link>
     </div>
     <el-form-item>
       <el-button class="login-button" type="primary" @click="login(rulesRef, form2)">
