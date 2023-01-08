@@ -1,53 +1,57 @@
 <template>
-  <el-form ref="rulesRef" :model="form1" :rules="rules" v-if="loginchoice == 'password'">
-    <el-form-item prop="user">
+  <el-form ref="formRef" :model="form" :rules="formRules">
+    <el-form-item prop="user" v-if="loginchoice == 'password'">
       <el-input
-        v-model="form1.user"
+        v-model="form.user"
         placeholder="用户名/手机号/邮箱"
         size="large"
-        :autocomplete="autocomplete"
+        autocomplete="on"
       />
     </el-form-item>
     <el-form-item prop="key" v-if="loginchoice == 'password'">
       <el-input
         type="password"
-        v-model="form1.key"
+        v-model="form.key"
         placeholder="密码"
         size="large"
-        :autocomplete="autocomplete"
+        autocomplete="on"
       />
     </el-form-item>
-    <div class="login-password">
-      <el-checkbox v-model="form1.autocomplete" label="记住密码" />
-      <el-link :underline="false" @click="loginchoice = 'code'">验证码登录</el-link>
-    </div>
-    <el-form-item>
-      <el-button class="login-button" type="primary" @click="login(rulesRef, form1)">
-        登录
-      </el-button>
-    </el-form-item>
-  </el-form>
-  <el-form ref="rulesRef" :model="form2" :rules="rules" v-if="loginchoice == 'code'">
-    <el-form-item prop="user">
+    <el-form-item prop="user" v-if="loginchoice == 'code'">
       <el-input
-        v-model="form2.user"
+        v-model="form.user"
         placeholder="邮箱"
         size="large"
-        :autocomplete="autocomplete"
+        autocomplete="on"
       />
     </el-form-item>
-    <el-form-item prop="key">
-      <el-input class="input-code" v-model="form2.key" placeholder="验证码" size="large">
-        <template #append>
-          <el-button @click="getCode(rulesRef, form2.user)">获取验证码</el-button>
-        </template>
-      </el-input>
+    <el-form-item prop="key" v-if="loginchoice == 'code'">
+      <el-input
+        class="input-code"
+        v-model="form.key"
+        placeholder="验证码"
+        size="large"
+      />
+      <el-button size="large" @click="getCode(formRef)">获取验证码</el-button>
     </el-form-item>
-    <div class="login-code">
-      <el-link :underline="false" @click="loginchoice = 'password'">密码登录</el-link>
+    <div class="login-method">
+      <el-link
+        :underline="false"
+        @click="loginChange(formRef)"
+        v-if="loginchoice == 'code'"
+      >
+        密码登录
+      </el-link>
+      <el-link
+        :underline="false"
+        @click="loginChange(formRef)"
+        v-if="loginchoice == 'password'"
+      >
+        验证码登录
+      </el-link>
     </div>
     <el-form-item>
-      <el-button class="login-button" type="primary" @click="login(rulesRef, form2)">
+      <el-button class="login-button" type="primary" @click="login(formRef)">
         登录
       </el-button>
     </el-form-item>
@@ -62,45 +66,50 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import { codeEmail, loginEmailCode } from "@/api/login";
-import type { FormInstance, FormRules } from "element-plus";
-import type { LoginData, LoginForm, MyResponse } from "@/utils/types";
+import { ElMessage, type FormInstance, type FormRules } from "element-plus";
+import type { LoginData, MyResponse } from "@/utils/types";
 import { setToken } from "@/utils/auth";
-const autocomplete = ref<boolean>(false);
+import router from "@/router";
 const loginchoice = ref<string>("password");
-const rulesRef = ref<FormInstance>();
-const form1 = reactive<LoginForm>({
+const formRef = ref<FormInstance>();
+const form = reactive({
   user: "",
   key: "",
-  autocomplete: false,
 });
-const form2 = reactive<LoginForm>({
-  user: "",
-  key: "",
-  autocomplete: false,
-});
-const rules = reactive<FormRules>({
+const formRules = reactive<FormRules>({
   user: [{ required: true, message: "用户名不能为空", trigger: "blur" }],
   key: [{ required: true, message: "该处不能为空", trigger: "blur" }],
 });
-function login(formRef: FormInstance | undefined, form: LoginForm | undefined) {
-  if (!formRef || !form) return;
-  formRef.validate(async (valid, fields) => {
+function loginChange(formRef: FormInstance | undefined) {
+  if (!formRef) return;
+  if (loginchoice.value == "code") loginchoice.value = "password";
+  else loginchoice.value = "code";
+  formRef.resetFields();
+}
+async function login(formRef: FormInstance | undefined) {
+  if (!formRef) return;
+  await formRef.validate(async (valid, field) => {
     if (valid) {
-      autocomplete.value = form.autocomplete;
+      console.log(form);
       const data: LoginData = {
         email: form.user,
         code: form.key,
       };
-      const response: MyResponse | null = await loginEmailCode(data);
-      if (response) setToken(response.data.token);
-    }
+      const response: MyResponse | undefined = await loginEmailCode(data);
+      if (!response) return;
+      setToken(response.data.token);
+      ElMessage.success("登录成功");
+      router.push("/home");
+    } else console.log(field);
   });
   formRef.resetFields();
 }
-async function getCode(formRef: FormInstance | undefined, email: string | undefined) {
-  if (!formRef || !email) return;
-  formRef.validate();
-  await codeEmail(email);
+async function getCode(formRef: FormInstance | undefined) {
+  if (!formRef) return;
+  await formRef.validateField("user", async (valid, field) => {
+    if (valid) await codeEmail(form.user);
+    else console.log(field);
+  });
 }
 </script>
 
@@ -108,16 +117,17 @@ async function getCode(formRef: FormInstance | undefined, email: string | undefi
 .login-button {
   width: 300px;
 }
+
 .input-code {
-  width: 300px;
+  width: 190px;
 }
-.login-code {
+
+.login-method {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-.login-footer,
-.login-password {
+.login-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -17,7 +17,7 @@ async function request(method: method, url: string, data?: any): Promise<any> {
   );
   if (response.code != 200) {
     ElMessage.error(response.message);
-    return null;
+    return;
   }
   return response;
 }

@@ -1,10 +1,5 @@
 <template>
-  <el-menu
-    router
-    mode="horizontal"
-    :ellipsis="false"
-    @select="handleSelect"
-  >
+  <el-menu router mode="horizontal" :ellipsis="false" @select="handleSelect">
     <div class="icon-menu" @click="menuClick">
       <div class="icon-menu" v-if="isCollapse.collapse"><IconMenuExpand /></div>
       <div class="icon-menu" v-else><IconMenuCollapse /></div>
@@ -27,7 +22,7 @@ const isCollapse = useCollapseStore();
 function menuClick() {
   isCollapse.collapse = !isCollapse.collapse;
 }
-const handleSel../../components/layiout/__VLS_types.jsng, keyPath: string[]) => {
+const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
 };
 </script>

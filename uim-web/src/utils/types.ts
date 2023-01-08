@@ -23,8 +23,3 @@ export interface RegisterData {
   roleId: string;
   code?: string;
 }
-export interface LoginForm {
-  user: string;
-  key: string;
-  autocomplete: boolean;
-}
