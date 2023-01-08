@@ -19,6 +19,7 @@ const title = import.meta.env.VITE_TITLE;
   width: 100%;
   height: 100%;
   background-image: url(@/assets/images/background.jpg);
+  background-size: cover;
 }
 .el-container-base {
   justify-content: center;
@@ -31,5 +32,10 @@ const title = import.meta.env.VITE_TITLE;
 .project-name {
   font-size: 20px;
   text-align: center;
+}
+</style>
+<style>
+a {
+  text-decoration: none;
 }
 </style>

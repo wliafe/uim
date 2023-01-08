@@ -1,8 +1,8 @@
 package com.wliafe.common.domain;
 
-import com.wliafe.common.constant.HttpStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import org.springframework.http.HttpStatus;
 
 /**
  * 操作消息提醒
@@ -14,37 +14,20 @@ public class AjaxResult {
     @Schema(description = "校验码", example = "200")
     private Integer code;
     @Schema(description = "返回消息", example = "请求成功")
-    private String msg;
+    private String message;
     @Schema(description = "返回数据")
     private Object data;
 
     /**
-     * 初始化一个新创建的 AjaxResult 对象，使其表示一个空消息。
-     */
-    public AjaxResult() {
-    }
-
-    /**
      * 初始化一个新创建的 AjaxResult 对象
      *
      * @param code 状态码
-     * @param msg  返回内容
-     */
-    public AjaxResult(int code, String msg) {
-        this.code = code;
-        this.msg = msg;
-    }
-
-    /**
-     * 初始化一个新创建的 AjaxResult 对象
-     *
-     * @param code 状态码
-     * @param msg  返回内容
+     * @param message  返回内容
      * @param data 数据对象
      */
-    public AjaxResult(int code, String msg, Object data) {
+    public AjaxResult(int code, String message, Object data) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
         this.data = data;
     }
 
@@ -69,22 +52,22 @@ public class AjaxResult {
     /**
      * 返回成功消息
      *
-     * @param msg 返回内容
+     * @param message 返回内容
      * @return 成功消息
      */
-    public static AjaxResult success(String msg) {
-        return AjaxResult.success(msg, null);
+    public static AjaxResult success(String message) {
+        return AjaxResult.success(message, null);
     }
 
     /**
      * 返回成功消息
      *
-     * @param msg  返回内容
+     * @param message  返回内容
      * @param data 数据对象
      * @return 成功消息
      */
-    public static AjaxResult success(String msg, Object data) {
-        return new AjaxResult(HttpStatus.SUCCESS, msg, data);
+    public static AjaxResult success(String message, Object data) {
+        return new AjaxResult(HttpStatus.OK.value(), message, data);
     }
 
     /**
@@ -99,32 +82,32 @@ public class AjaxResult {
     /**
      * 返回错误消息
      *
-     * @param msg 返回内容
+     * @param message 返回内容
      * @return 警告消息
      */
-    public static AjaxResult error(String msg) {
-        return AjaxResult.error(msg, null);
+    public static AjaxResult error(String message) {
+        return AjaxResult.error(message, null);
     }
 
     /**
      * 返回错误消息
      *
-     * @param msg  返回内容
+     * @param message  返回内容
      * @param data 数据对象
      * @return 警告消息
      */
-    public static AjaxResult error(String msg, Object data) {
-        return new AjaxResult(HttpStatus.ERROR, msg, data);
+    public static AjaxResult error(String message, Object data) {
+        return new AjaxResult(HttpStatus.INTERNAL_SERVER_ERROR.value(), message, data);
     }
 
     /**
      * 返回错误消息
      *
      * @param code 状态码
-     * @param msg  返回内容
+     * @param message  返回内容
      * @return 警告消息
      */
-    public static AjaxResult error(int code, String msg) {
-        return new AjaxResult(code, msg, null);
+    public static AjaxResult error(int code, String message) {
+        return new AjaxResult(code, message, null);
     }
 }

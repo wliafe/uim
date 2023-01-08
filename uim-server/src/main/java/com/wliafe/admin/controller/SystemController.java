@@ -16,7 +16,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,13 +57,13 @@ public class SystemController {
 
     @Operation(summary = "通过邮箱注册", description = "所需属性 email code")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "请求成功"),
-            @ApiResponse(responseCode = "500", description = "请求失败")
+            @ApiResponse(responseCode = "200", description = "注册成功"),
+            @ApiResponse(responseCode = "500", description = "注册失败")
     })
     @PostMapping("/register/email")
     public AjaxResult register(@RequestBody Register register) {
-        if (codeService.codeNotRight(register.getEmail(), register.getCode())) throw new RuntimeException("验证失败");
-        if (Objects.isNull(roleService.getById(register.getRoleId()))) throw new RuntimeException("角色不存在");
+        if (codeService.codeNotRight(register.getEmail(), register.getCode())) throw new RuntimeException("注册验证失败");
+        if (Objects.isNull(roleService.getById(register.getRoleId()))) throw new RuntimeException("注册角色不存在");
         User user = userService.selectByEmail(register.getEmail());
         if (Objects.isNull(user)) {
             user = new User();
@@ -72,13 +71,13 @@ public class SystemController {
         } else if (!Objects.isNull(userRoleService.selectByUserIdAndRoleId(user.getUserId(), register.getRoleId())))
             throw new RuntimeException("邮箱已注册");
         systemService.register(user, register.getRoleId());
-        return AjaxResult.success("用户添加成功");
+        return AjaxResult.success("用户注册成功");
     }
 
     @Operation(summary = "通过邮箱登录", description = "所需属性 email code")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "请求成功"),
-            @ApiResponse(responseCode = "500", description = "请求失败")
+            @ApiResponse(responseCode = "200", description = "登录成功"),
+            @ApiResponse(responseCode = "500", description = "登录失败")
     })
     @PostMapping("/login/email/code")
     public AjaxResult login(@RequestBody Login login) {

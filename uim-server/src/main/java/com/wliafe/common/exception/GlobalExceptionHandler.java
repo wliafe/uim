@@ -15,26 +15,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
-
     @ExceptionHandler(value = RuntimeException.class)
     @ResponseBody
     public AjaxResult RuntimeExceptionHandler(RuntimeException e) {
-        log.error("运行时异常:{}", e.getMessage());
+        log.error(e.getMessage());
+        System.out.println(e.getStackTrace()[0]);
         return AjaxResult.error(e.getMessage());
     }
 
     @ExceptionHandler(value = NullPointerException.class)
     @ResponseBody
     public AjaxResult exceptionHandler(NullPointerException e) {
-        log.error("空指针异常:{}", e.getMessage());
-        return AjaxResult.error("空指针异常:" + e.getMessage());
+        log.error(e.getMessage());
+        System.out.println(e.getStackTrace()[0]);
+        return AjaxResult.error(e.getMessage());
     }
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public AjaxResult exceptionHandler(Exception e) {
-        log.error("未知异常:{}", e.getMessage());
-        return AjaxResult.error("未知异常:" + e.getMessage());
+        log.error(e.getMessage());
+        System.out.println(e.getStackTrace()[0]);
+        return AjaxResult.error(e.getMessage());
     }
 }

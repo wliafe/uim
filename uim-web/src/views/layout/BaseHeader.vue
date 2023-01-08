@@ -20,14 +20,14 @@
 </template>
 
 <script setup lang="ts">
-import IconMenuCollapse from "@/components/icons/iconMenuCollapse.vue";
-import IconMenuExpand from "@/components/icons/iconMenuExpand.vue";
+import IconMenuCollapse from "@/components/icons/MenuCollapseIcon.vue";
+import IconMenuExpand from "@/components/icons/MenuExpandIcon.vue";
 import { useCollapseStore } from "@/stores/collapse";
 const isCollapse = useCollapseStore();
 function menuClick() {
   isCollapse.collapse = !isCollapse.collapse;
 }
-const handleSelect = (key: string, keyPath: string[]) => {
+const handleSel../../components/layiout/__VLS_types.jsng, keyPath: string[]) => {
   console.log(key, keyPath);
 };
 </script>

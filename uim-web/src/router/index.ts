@@ -15,7 +15,7 @@ const router = createRouter({
         {
           path: "account",
           name: "account",
-          component: () => import("@/components/pages/AccountPage.vue"),
+          component: () => import("@/views/layout/pages/AccountPage.vue"),
         },
       ],
     },
@@ -26,12 +26,12 @@ const router = createRouter({
         {
           path: "login",
           name: "login",
-          component: () => import("@/components/login/Login.vue"),
+          component: () => import("@/views/login/Login.vue"),
         },
         {
           path: "register",
           name: "register",
-          component: () => import("@/components/login/Register.vue"),
+          component: () => import("@/views/login/Register.vue"),
         },
       ],
     },

@@ -7,6 +7,7 @@ import com.wliafe.admin.mapper.UserMapper;
 import com.wliafe.common.security.details.EmailCodeDetails;
 import com.wliafe.common.service.CodeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,9 +30,9 @@ public class EmailCodeDetailsService implements UserDetailsService {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(User::getEmail, username);
         User user = userMapper.selectOne(queryWrapper);
-        if (Objects.isNull(user)) throw new RuntimeException("用户邮箱输入错误");
+        if (Objects.isNull(user)) throw new AuthenticationServiceException("用户邮箱输入错误");
         List<String> permissions = menuMapper.getAuthoritiesByUserId(user.getUserId());
-//        if (Objects.isNull(permissions)) throw new RuntimeException("用户权限信息获取失败");
+//        if (Objects.isNull(permissions)) throw new AuthenticationServiceException("用户权限信息获取失败");
         return new EmailCodeDetails(user, username, codeService, permissions);
     }
 }

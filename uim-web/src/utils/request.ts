@@ -1,22 +1,25 @@
 import { getToken } from "@/utils/auth";
-import type { Request } from "./types";
+import { ElMessage } from "element-plus";
+import type { MyResponse, method } from "./types";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-async function request(
-  method: "GET" | "POST",
-  url: string,
-  data?: any,
-  token?: boolean
-): Promise<any> {
-  var request: Request = {
+async function request(method: method, url: string, data?: any): Promise<any> {
+  const headers: HeadersInit = { "Content-Type": "application/json" };
+  const token: string = getToken();
+  if (token) headers.token = token;
+  const request: RequestInit = {
     method: method,
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: headers,
   };
-  if (data != null && data != undefined) request.body = JSON.stringify(data);
-  if (token == true) request.headers.token = getToken();
-  return await fetch(BASE_URL + url).then((response) => response.json());
+  if (data) request.body = JSON.stringify(data);
+  const response: MyResponse = await fetch(BASE_URL + url, request).then(
+    (response) => response.json()
+  );
+  if (response.code != 200) {
+    ElMessage.error(response.message);
+    return null;
+  }
+  return response;
 }
 
 export default request;
