@@ -37,7 +37,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const token: string = getToken();
+  const token: any = getToken();
   if (to.path == "/login" || to.path == "/register") {
     if (token) next("/home");
     else next();

@@ -1,5 +1,10 @@
 <template>
-  <el-form ref="registerRef" :model="register" :rules="registerRules" status-icon="true">
+  <el-form
+    ref="registerRef"
+    :model="register"
+    :rules="registerRules"
+    status-icon="true"
+  >
     <el-form-item prop="email">
       <el-input v-model="register.email" placeholder="邮箱" size="large" />
     </el-form-item>
@@ -46,7 +51,7 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
 import type { FormInstance } from "element-plus";
-import { codeEmail } from "@/api/login";
+import { ApiGetCodeByEmail } from "@/api/login";
 const registerRef = ref<FormInstance>();
 const register = reactive({
   email: "",
@@ -99,7 +104,7 @@ async function onSubmit() {
 }
 
 async function getCode() {
-  await codeEmail("wliafe@163.com");
+  await ApiGetCodeByEmail("wliafe@163.com");
 }
 </script>
 

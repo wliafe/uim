@@ -9,15 +9,16 @@
       <template #title>管理人员</template>
       <el-menu-item index="/account">个人信息</el-menu-item>
       <el-menu-item index="1-2">切换账号</el-menu-item>
-      <el-menu-item index="1-3">退出</el-menu-item>
+      <el-menu-item index="/login" @click="logout">退出</el-menu-item>
     </el-sub-menu>
   </el-menu>
 </template>
 
 <script setup lang="ts">
-import IconMenuCollapse from "@/components/icons/MenuCollapseIcon.vue";
-import IconMenuExpand from "@/components/icons/MenuExpandIcon.vue";
+import { ApiLogout } from "@/api/login";
 import { useCollapseStore } from "@/stores/collapse";
+import { removeToken } from "@/utils/auth";
+import { Expand, Fold } from "@element-plus/icons-vue";
 const isCollapse = useCollapseStore();
 function menuClick() {
   isCollapse.collapse = !isCollapse.collapse;
@@ -25,6 +26,10 @@ function menuClick() {
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
 };
+function logout() {
+  ApiLogout();
+  removeToken();
+}
 </script>
 
 <style scoped>
