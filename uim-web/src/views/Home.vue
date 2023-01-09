@@ -1,20 +1,20 @@
 <template>
   <div class="common-layout">
     <el-container class="el-container-base">
-      <el-aside><BaseAside /></el-aside>
+      <el-aside><Aside /></el-aside>
       <el-container>
-        <el-header><BaseHeader /></el-header>
+        <el-header><Header /></el-header>
         <el-main><RouterView /></el-main>
-        <el-footer><BaseFooter /></el-footer>
+        <el-footer><Footer /></el-footer>
       </el-container>
     </el-container>
   </div>
 </template>
 
 <script setup lang="ts">
-import BaseHeader from "@/views/layout/BaseHeader.vue";
-import BaseAside from "@/views/layout/BaseAside.vue";
-import BaseFooter from "@/views/layout/BaseFooter.vue";
+import Header from "@/views/layout/Header.vue";
+import Aside from "@/views/layout/Aside.vue";
+import Footer from "@/views/layout/Footer.vue";
 </script>
 
 <style scoped>
@@ -26,13 +26,18 @@ import BaseFooter from "@/views/layout/BaseFooter.vue";
   width: 100%;
   height: 100%;
 }
-.el-header {
-  padding: 0px;
-}
 .el-aside {
   width: auto;
 }
-.el-footer{
+.el-header {
+  height: 50px;
+  padding: 0px;
+}
+.el-main {
+  padding: 0px;
+  height: 100%;
+}
+.el-footer {
   display: flex;
   justify-content: center;
   align-items: center;

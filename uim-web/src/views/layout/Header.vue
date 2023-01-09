@@ -1,14 +1,14 @@
 <template>
   <el-menu router mode="horizontal" :ellipsis="false" @select="handleSelect">
     <div class="icon-menu" @click="menuClick">
-      <div class="icon-menu" v-if="isCollapse.collapse"><IconMenuExpand /></div>
-      <div class="icon-menu" v-else><IconMenuCollapse /></div>
+      <el-icon :size="30" v-if="isCollapse.collapse"><Expand /></el-icon>
+      <el-icon :size="30" v-if="!isCollapse.collapse"><Fold /></el-icon>
     </div>
     <div class="flex-grow" />
     <el-sub-menu index="1">
       <template #title>管理人员</template>
-      <el-menu-item index="/account">个人信息</el-menu-item>
-      <el-menu-item index="1-2">切换账号</el-menu-item>
+      <el-menu-item index="/home/account">个人信息</el-menu-item>
+      <el-menu-item index="/login" @click="logout">切换账号</el-menu-item>
       <el-menu-item index="/login" @click="logout">退出</el-menu-item>
     </el-sub-menu>
   </el-menu>
@@ -18,7 +18,7 @@
 import { ApiLogout } from "@/api/login";
 import { useCollapseStore } from "@/stores/collapse";
 import { removeToken } from "@/utils/auth";
-import { Expand, Fold } from "@element-plus/icons-vue";
+import { Expand, Fold } from "@/icons";
 const isCollapse = useCollapseStore();
 function menuClick() {
   isCollapse.collapse = !isCollapse.collapse;

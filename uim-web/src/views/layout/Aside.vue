@@ -28,7 +28,7 @@
     </el-sub-menu>
     <el-sub-menu index="3">
       <template #title>
-        <el-icon><Document /></el-icon>
+        <el-icon :size="17"><Monitor /></el-icon>
         <span>系统监控</span>
       </template>
       <el-menu-item index="/">车组管理</el-menu-item>
@@ -36,17 +36,12 @@
       <el-menu-item index="/">设备管理</el-menu-item>
       <el-menu-item index="/">志愿者管理</el-menu-item>
     </el-sub-menu>
-    <el-sub-menu index="4">
-      <template #title>
-        <el-icon><Document /></el-icon>
-        <span>系统工具</span>
-      </template>
-    </el-sub-menu>
   </el-menu>
 </template>
 
 <script setup lang="ts">
-import { Document, Setting, House } from "@element-plus/icons-vue";
+import { Setting, House } from "@element-plus/icons-vue";
+import { Monitor } from "@/icons";
 import { useCollapseStore } from "@/stores/collapse";
 const title = import.meta.env.VITE_TITLE;
 const isCollapse = useCollapseStore();
