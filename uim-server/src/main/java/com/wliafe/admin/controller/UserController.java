@@ -4,7 +4,6 @@ import com.wliafe.admin.service.UserService;
 import com.wliafe.common.domain.AjaxResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -36,7 +35,7 @@ public class UserController {
     @PreAuthorize("hasAuthority('user:get')")
     @GetMapping("/get/email")
     public AjaxResult getByEmail(@RequestParam String email) {
-        return AjaxResult.success(userService.selectByEmail(email));
+        return AjaxResult.success(userService.getByEmail(email));
     }
 
     @Operation(summary = "请求测试")

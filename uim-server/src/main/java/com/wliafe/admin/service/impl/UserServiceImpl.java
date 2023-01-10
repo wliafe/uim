@@ -17,7 +17,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private UserMapper userMapper;
 
     @Override
-    public User selectByEmail(String email) {
+    public User getByEmail(String email) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(User::getEmail, email);
         return userMapper.selectOne(queryWrapper);

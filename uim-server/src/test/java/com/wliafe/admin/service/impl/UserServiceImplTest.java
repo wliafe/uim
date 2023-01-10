@@ -18,7 +18,7 @@ public class UserServiceImplTest {
 //    }
     @Test
     void testSelectByEmail() {
-        User user = userService.selectByEmail("wliafe");
+        User user = userService.getByEmail("wliafe");
         System.out.println(user);
     }
 
