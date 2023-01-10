@@ -7,7 +7,7 @@
       </div>
       <div class="flex-grow" />
       <el-sub-menu index="1">
-        <template #title>管理人员</template>
+        <template #title>{{ user.user.nickName }}</template>
         <el-menu-item index="/home/account">个人信息</el-menu-item>
         <el-menu-item index="/login" @click="logout">切换账号</el-menu-item>
         <el-menu-item index="/login" @click="logout">退出</el-menu-item>
@@ -21,7 +21,9 @@ import { ApiLogout } from "@/api/login";
 import { useCollapseStore } from "@/stores/collapse";
 import { removeToken } from "@/utils/auth";
 import { Expand, Fold } from "@/icons";
+import { useUserStore } from "@/stores/user";
 const isCollapse = useCollapseStore();
+const user = useUserStore();
 function menuClick() {
   isCollapse.collapse = !isCollapse.collapse;
 }

@@ -3,7 +3,11 @@ import { ElMessage } from "element-plus";
 import type { MyResponse, method } from "./types";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-async function request(method: method, url: string, data?: any): Promise<any> {
+async function request(
+  method: method,
+  url: string,
+  data?: any
+): Promise<MyResponse | boolean> {
   const headers: HeadersInit = { "Content-Type": "application/json" };
   const token: string = getToken();
   if (token) headers.token = token;
@@ -17,7 +21,7 @@ async function request(method: method, url: string, data?: any): Promise<any> {
   );
   if (response.code != 200) {
     ElMessage.error(response.message);
-    return;
+    return false;
   }
   return response;
 }

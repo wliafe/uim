@@ -57,6 +57,14 @@ public class SystemServiceImpl implements SystemService {
     }
 
     @Override
+    public AjaxResult getByToken() {
+        AuthenticationToken authentication = (AuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        String token = (String) authentication.getCredentials();
+        BaseDetails baseDetails = (BaseDetails) tokenService.getValue(token);
+        return AjaxResult.success(baseDetails.getUser());
+    }
+
+    @Override
     public AjaxResult logout() {
         AuthenticationToken authentication = (AuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         String token = (String) authentication.getCredentials();

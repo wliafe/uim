@@ -11,6 +11,7 @@ import com.wliafe.admin.service.SystemService;
 import com.wliafe.common.service.MailService;
 import com.wliafe.common.domain.AjaxResult;
 import com.wliafe.common.service.CodeService;
+import com.wliafe.common.service.TokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -64,7 +65,7 @@ public class SystemController {
     public AjaxResult register(@RequestBody Register register) {
         if (codeService.codeNotRight(register.getEmail(), register.getCode())) throw new RuntimeException("注册验证失败");
         if (Objects.isNull(roleService.getById(register.getRoleId()))) throw new RuntimeException("注册角色不存在");
-        User user = userService.selectByEmail(register.getEmail());
+        User user = userService.getByEmail(register.getEmail());
         if (Objects.isNull(user)) {
             user = new User();
             user.setEmail(register.getEmail());
@@ -83,6 +84,16 @@ public class SystemController {
     public AjaxResult login(@RequestBody Login login) {
         AuthenticationToken authentication = new AuthenticationToken(login.getEmail(), login.getCode());
         return systemService.login(authentication);
+    }
+
+    @Operation(summary = "根据token获取用户信息")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "请求成功"),
+            @ApiResponse(responseCode = "500", description = "请求失败")
+    })
+    @GetMapping("/get/token")
+    public AjaxResult getByToken() {
+        return systemService.getByToken();
     }
 
     @Operation(summary = "退出登录")

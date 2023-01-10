@@ -1,5 +1,8 @@
-import { getToken } from "@/utils/auth";
 import { createRouter, createWebHistory } from "vue-router";
+import { setCookie, getCookie } from "@/utils/cookie";
+import type { MyResponse } from "@/utils/types";
+import { ApiGetUserByToken } from "@/api/login";
+import { getToken, removeToken } from "@/utils/auth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,13 +39,30 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to, from, next) => {
+async function testToken(token: any): Promise<boolean> {
+  if (token) {
+    const user: MyResponse = getCookie("user");
+    if (user) return true;
+    else {
+      const user = await ApiGetUserByToken();
+      if (user) {
+        setCookie("user", user);
+        return true;
+      } else {
+        removeToken();
+        return false;
+      }
+    }
+  } else return false;
+}
+
+router.beforeEach(async (to, from, next) => {
   const token: any = getToken();
   if (to.path == "/login" || to.path == "/register") {
-    if (token) next("/home");
+    if (await testToken(token)) next("/home");
     else next();
   } else {
-    if (token) next();
+    if (await testToken(token)) next();
     else next("/login");
   }
 });

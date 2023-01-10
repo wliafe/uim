@@ -9,5 +9,7 @@ public interface SystemService {
 
     AjaxResult login(AuthenticationToken authentication);
 
+    AjaxResult getByToken();
+
     AjaxResult logout();
 }

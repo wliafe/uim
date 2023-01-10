@@ -6,4 +6,5 @@ export const ApiLoginByEmailCode = (data: LoginData) =>
   fetch("POST", "/sys/login/email/code", data);
 export const ApiRegisterByEmail = (data: RegisterData) =>
   fetch("POST", "/sys/register/email", data);
+export const ApiGetUserByToken = () => fetch("GET", "/sys/get/token");
 export const ApiLogout = () => fetch("POST", "/sys/logout");

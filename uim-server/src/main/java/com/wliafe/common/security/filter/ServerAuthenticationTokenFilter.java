@@ -28,9 +28,10 @@ public class ServerAuthenticationTokenFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-        if (!tokenService.checkToken(token)) throw new ServletException("用户未登录");
+//TODO 过滤器异常处理
+        if (!tokenService.checkToken(token)) throw new RuntimeException("用户未登录");
         BaseDetails baseDetails = (BaseDetails) tokenService.getValue(token);
-        if (Objects.isNull(baseDetails)) throw new ServletException("baseDetails 解析失败");
+        if (Objects.isNull(baseDetails)) throw new RuntimeException("baseDetails 解析失败");
         AuthenticationToken authentication = new AuthenticationToken(baseDetails.getUser(), token, baseDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
