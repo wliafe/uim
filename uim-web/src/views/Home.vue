@@ -5,7 +5,9 @@
       <el-container>
         <el-header><Header /></el-header>
         <el-main><RouterView /></el-main>
-        <el-footer><Footer /></el-footer>
+        <el-affix position="bottom" :offset="60">
+          <el-footer><Footer /></el-footer>
+        </el-affix>
       </el-container>
     </el-container>
   </div>
