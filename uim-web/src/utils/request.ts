@@ -7,7 +7,7 @@ async function request(
   method: method,
   url: string,
   data?: any
-): Promise<MyResponse | boolean> {
+): Promise<MyResponse | undefined> {
   const headers: HeadersInit = { "Content-Type": "application/json" };
   const token: string = getToken();
   if (token) headers.token = token;
@@ -21,7 +21,7 @@ async function request(
   );
   if (response.code != 200) {
     ElMessage.error(response.message);
-    return false;
+    return;
   }
   return response;
 }

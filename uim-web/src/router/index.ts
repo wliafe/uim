@@ -44,9 +44,9 @@ async function testToken(token: any): Promise<boolean> {
     const user: MyResponse = getCookie("user");
     if (user) return true;
     else {
-      const user = await ApiGetUserByToken();
-      if (user) {
-        setCookie("user", user);
+      const response = await ApiGetUserByToken();
+      if (response) {
+        setCookie("user", response.data);
         return true;
       } else {
         removeToken();

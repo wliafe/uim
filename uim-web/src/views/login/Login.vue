@@ -94,7 +94,7 @@ async function login(formRef: FormInstance | undefined) {
         email: form.user,
         code: form.key,
       };
-      const response: MyResponse | undefined = await ApiLoginByEmailCode(data);
+      const response = await ApiLoginByEmailCode(data);
       if (!response) return;
       setToken(response.data.token);
       ElMessage.success("登录成功");
