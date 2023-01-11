@@ -4,8 +4,6 @@
     default-active="/home"
     :collapse="isCollapse.collapse"
     :unique-opened="true"
-    @open="handleOpen"
-    @close="handleClose"
   >
     <el-menu-item index="/home" class="home-logo">
       <el-icon><div class="logo" /></el-icon>
@@ -45,12 +43,6 @@ import { Monitor } from "@/icons";
 import { useCollapseStore } from "@/stores/collapse";
 const title = import.meta.env.VITE_TITLE;
 const isCollapse = useCollapseStore();
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath);
-};
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath);
-};
 </script>
 
 <style scoped>
