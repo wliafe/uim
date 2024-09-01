@@ -1,0 +1,35 @@
+spring:
+  profiles:
+    active: dev
+  mail:
+    protocol: smtp
+    host: smtp.163.com
+    port: 25
+    username:
+    password:
+    default-encoding: utf-8
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #输出mybatis-plus信息
+#uim:
+#  title: 用户信息管理系统 #系统名称
+#  description: 记录并管理用户基本信息 #系统描述
+#  version: 1.0 #版本
+#  author:
+#    name:
+#    url:
+#    email:
+#log:
+#  path: D:/uim #日志地址
+#  name: uim #日志名
+#  level: INFO #日志显示级别 error warn
+#token:
+#  time: 14 #redis token 14天过期
+role:
+  admin:
+    phone:
+    email:
